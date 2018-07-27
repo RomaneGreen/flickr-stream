@@ -1,1 +1,1 @@
-rails app that uses flikr's api to grab a users photos by id
+rails app that uses flickr's api to grab a users photos by id
