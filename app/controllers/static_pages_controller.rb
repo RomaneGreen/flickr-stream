@@ -1,19 +1,24 @@
 
+
 class StaticPagesController < ApplicationController
 
   def home
 
+    Flickr.configure do |config|
+      config.api_key       = ENV['FLICKRAW_API_KEY']
+      config.shared_secret =  ENV['FLICKRAW_SHARED_SECRET']
+    end
+
+
   end
 
   def url
-
-base_url = "https://www.flickr.com/photos/"
-
-id = params["staticpages"]["enter_id"]
-
-photostream = base_url+"#{id}"
-
-redirect_to photostream
+    id = params["staticpages"]["enter_id"]
+    person = Flickr.people.find("#{id}")
+    @photos = person.public_photos(sizes: true).map(&:medium500!)
+  rescue => e
+    render 'home'
+    flash[:danger] = 'Invalid User'
   end
 
 

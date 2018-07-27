@@ -1,4 +1,3 @@
-
 <h1>Enter ID to view photostream!</h1>
 
 <%= form_for(:staticpages) do |f| %>
@@ -6,6 +5,11 @@
      <%= f.label :enter_id %>
      <%= f.text_field :enter_id, class: 'form-control' %> <br> <br>
 
-     <%= f.submit "Submit", class:"button" %>
+     <%= f.submit "Submit", class: "btn btn-primary" %>
 
+<% end %>
+
+
+<%@photos.each do |photo| %>
+  <%= image_tag photo.source_url, size: "#{photo.width}x#{photo.height}" %>
 <% end %>
